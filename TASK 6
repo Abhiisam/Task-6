@@ -1,0 +1,232 @@
+Q:1 - you have given a python list [10, 501, 22, 37, 100, 999, 87, 351] your task is to create two list one which all the even numbers and another list which will have all the  odd numbers in it?
+
+original_list = [10, 501, 22, 37, 100, 999, 87, 351]
+
+# Initialize empty lists for even and odd numbers
+even_numbers = []
+odd_numbers = []
+
+# Iterate through the original list and sort even and odd numbers into separate lists
+for num in original_list:
+    if num % 2 == 0:
+        even_numbers.append(num)
+    else:
+        odd_numbers.append(num)
+
+print("Even numbers:", even_numbers)
+print("Odd numbers:", odd_numbers)
+
+Q:2 - given a python list  [10, 501, 22, 37, 100, 999, 87, 351] your task is to count all the prime number and create a new python list which contain all the prime numbers in it? 
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+original_list = [10, 501, 22, 37, 100, 999, 87, 351]
+prime_numbers = []
+
+# Count prime numbers and add them to the prime_numbers list
+prime_count = 0
+for num in original_list:
+    if is_prime(num):
+        prime_numbers.append(num)
+        prime_count += 1
+
+print("Total prime numbers:", prime_count)
+print("List of prime numbers:", prime_numbers)
+
+Q:3 - given a python list  [10, 501, 22, 37, 100, 999, 87, 351] find out how many numbers are there in the given python list which are happy numbers?
+
+def is_happy_number(n):
+    seen = set()
+    while n != 1 and n not in seen:
+        seen.add(n)
+        n = sum(int(digit) ** 2 for digit in str(n))
+    return n == 1
+def count_happy_numbers(numbers):
+    count = 0
+    for num in numbers:
+        if is_happy_number(num):
+            count += 1
+    return count
+
+original_list = [10, 501, 22, 37, 100, 999, 87, 351]
+happy_count = count_happy_numbers(original_list)
+
+print("Total happy numbers in the list:", happy_count)
+
+Q:4 - write a python program to find the sum of first and last digit of an integer
+
+def sum_first_last_digit(number):
+    # Convert the number to a string to easily access its digits
+    num_str = str(number)
+
+    # Extract the first and last digits
+    first_digit = int(num_str[0])
+    last_digit = int(num_str[-1])
+
+    # Calculate the sum of the first and last digits
+    sum_digits = first_digit + last_digit
+
+    return sum_digits
+
+# Example usage
+input_number = 87654321  # You can input any integer here
+result = sum_first_last_digit(input_number)
+print("Sum of the first and last digits:", result)
+
+Q:5 - you have been given a list of N integers which represents the number of mangoes in a bag. Each bag has a variable number of Mangoes. there are M students in a Guvi class, your task is to distribute the mangoes in such a way that each student gets one bag. the difference between the number of mangoes in a bag with maximum mangoes and bag with minimum mangoes given to the student is minimum?
+
+def distribute_mangoes(mangoes_in_bags, M):
+    mangoes_in_bags.sort()  # Sort the bags in ascending order of mangoes
+
+    min_diff = float('inf')
+    start = 0
+    end = M - 1
+    min_diff_indices = [0, 0]
+
+    while end < len(mangoes_in_bags):
+        diff = mangoes_in_bags[end] - mangoes_in_bags[start]
+        if diff < min_diff:
+            min_diff = diff
+            min_diff_indices = [start, end]
+
+        start += 1
+        end += 1
+
+    return mangoes_in_bags[min_diff_indices[0]: min_diff_indices[1] + 1]
+
+# Example usage
+mangoes = [7, 3, 2, 4, 9, 12, 15, 5, 17]
+students = 3
+
+result = distribute_mangoes(mangoes, students)
+print("Bags distributed to students:", result)
+
+Q:6 you have been given three lists. your task is to find the duplicates in the three lists. Write a python program for the same. you can use your own python lists?
+
+# Example lists
+list1 = [1, 2, 3, 4, 5, 2, 7]
+list2 = [2, 5, 6, 7, 8, 9, 2]
+list3 = [2, 5, 9, 10, 11, 2]
+
+# Find duplicates among the three lists
+duplicates = list(set(list1) & set(list2) & set(list3))
+
+if len(duplicates) > 0:
+    print("Duplicates found in the three lists:", duplicates)
+else:
+    print("No duplicates found in the three lists.")
+
+Q:7 write a prthon program to find the forst non - repeating elements in a given list of integers?
+
+def first_non_repeating_element(nums):
+    count_dict = {}  # Dictionary to store the count of each element
+
+    # Count the occurrences of each element in the list
+    for num in nums:
+        if num in count_dict:
+            count_dict[num] += 1
+        else:
+            count_dict[num] = 1
+
+    # Find the first element with a count of 1
+    for num in nums:
+        if count_dict[num] == 1:
+            return num
+    
+    # Return None if there is no non-repeating element
+    return None
+
+# Example list of integers
+numbers = [3, 4, 2, 5, 3, 4, 6, 5]
+
+result = first_non_repeating_element(numbers)
+if result is not None:
+    print("First non-repeating element is:", result)
+else:
+    print("There is no non-repeating element in the list.")
+
+Q8: write a python program to find the minimum element in a rated and sorted list?
+
+def find_minimum_element(sorted_list):
+    if len(sorted_list) > 0:
+        return sorted_list[0]
+    else:
+        return None
+
+# Example sorted list
+sorted_numbers = [2, 4, 6, 8, 10]
+
+min_element = find_minimum_element(sorted_numbers)
+
+if min_element is not None:
+    print("Minimum element in the sorted list:", min_element)
+else:
+    print("The list is empty.")
+
+Q:9 you have been given a python list[10,20,30,9] and a value of 59. write a python program to find the troplet in the list whose sum is equal to the given value?
+
+def find_triplet_with_sum(nums, target):
+    nums.sort()  # Sort the list to apply two-pointer technique
+    for i in range(len(nums) - 2):
+        left = i + 1
+        right = len(nums) - 1
+
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+
+            if current_sum == target:
+                return [nums[i], nums[left], nums[right]]
+            elif current_sum < target:
+                left += 1
+            else:
+                right -= 1
+    
+    return None
+
+# Given list and target value
+given_list = [10, 20, 30, 9]
+target_value = 59
+
+result = find_triplet_with_sum(given_list, target_value)
+
+if result:
+    print("Triplet with sum", target_value, "found:", result)
+else:
+    print("No triplet found with sum equal to", target_value)
+
+Q:10 Given a list [4,2,-3,1,6] write a python program to fine if there is a sub-list with sum equal to zero?
+
+def sub_list_with_zero_sum(nums):
+    prefix_sum = 0
+    seen_sums = set()
+
+    for num in nums:
+        prefix_sum += num
+
+        if prefix_sum == 0 or prefix_sum in seen_sums:
+            return True
+
+        seen_sums.add(prefix_sum)
+
+    return False
+
+# Given list
+given_list = [4, 2, -3, 1, 6]
+
+result = sub_list_with_zero_sum(given_list)
+
+if result:
+    print("There exists a sub-list with sum equal to zero.")
+else:
+    print("No sub-list found with sum equal to zero.")
+
+
+
+
+
